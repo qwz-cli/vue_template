@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package interface_message;
+
+
+message BaseData{
+    string app_id = 1;
+    string channel_id = 2;
+    string frame_id = 3;
+    uint32 fps = 4;
+    double timestamp = 5;
+    uint32 alarm_flag = 6;
+    string alarm_type = 7;
+    bytes img = 8;
+    map<string, string> extend_field = 9;
+}
+
+message Point {
+    uint32 x = 1;
+    uint32 y = 2;
+}
+
+message Coordinate{
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message Rectangle {
+    uint32 lt_x = 1;
+    uint32 lt_y = 2;
+    uint32 rb_x = 3;
+    uint32 rb_y = 4;
+}
+
+message AlarmData{
+    uint32 alarm_flag = 1;
+    float alarm_confidence = 2;
+}
+
+message SingleSimpleObjectData {
+    float object_confidence = 1;
+    Rectangle object_rectangle = 2;
+    map<string, string> extend_field = 3;
+    map<string, Rectangle> inner_rectangle = 4;
+    map<string, AlarmData> alarm_map_data = 5;
+    string re_id = 6;
+    Coordinate coordinate = 7;
+    bytes cropped_image = 8; 
+}
+
+message SimpleObjectDataList {
+    repeated SingleSimpleObjectData single_simple_object_data = 1;
+}
+
+message PolygonVertexData {
+    repeated Point polygon_vertex = 1;
+}
+
+message PolygonVertexDataList {
+    repeated PolygonVertexData polygon_vertex_list = 1;
+}
+
+message DetectionCommonData {
+    BaseData base_data = 1;
+    map<string, PolygonVertexDataList> polygon_vertex_map_list_data = 2;
+    map<string, SimpleObjectDataList> single_object_map_list_data = 3;
+}
+
+message GeneralDetectionMapData {
+    map<string, DetectionCommonData> general_map_data = 1;
+}
+
+
+

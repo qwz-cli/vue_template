@@ -1,0 +1,208 @@
+/*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
+"use strict";
+
+var $protobuf = require("protobufjs/light");
+
+var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $protobuf.Root()))
+.addJSON({
+  interface_message: {
+    nested: {
+      BaseData: {
+        fields: {
+          appId: {
+            type: "string",
+            id: 1
+          },
+          channelId: {
+            type: "string",
+            id: 2
+          },
+          frameId: {
+            type: "string",
+            id: 3
+          },
+          fps: {
+            type: "uint32",
+            id: 4
+          },
+          timestamp: {
+            type: "double",
+            id: 5
+          },
+          alarmFlag: {
+            type: "uint32",
+            id: 6
+          },
+          alarmType: {
+            type: "string",
+            id: 7
+          },
+          img: {
+            type: "bytes",
+            id: 8
+          },
+          extendField: {
+            keyType: "string",
+            type: "string",
+            id: 9
+          }
+        }
+      },
+      Point: {
+        fields: {
+          x: {
+            type: "uint32",
+            id: 1
+          },
+          y: {
+            type: "uint32",
+            id: 2
+          }
+        }
+      },
+      Coordinate: {
+        fields: {
+          x: {
+            type: "float",
+            id: 1
+          },
+          y: {
+            type: "float",
+            id: 2
+          },
+          z: {
+            type: "float",
+            id: 3
+          }
+        }
+      },
+      Rectangle: {
+        fields: {
+          ltX: {
+            type: "uint32",
+            id: 1
+          },
+          ltY: {
+            type: "uint32",
+            id: 2
+          },
+          rbX: {
+            type: "uint32",
+            id: 3
+          },
+          rbY: {
+            type: "uint32",
+            id: 4
+          }
+        }
+      },
+      AlarmData: {
+        fields: {
+          alarmFlag: {
+            type: "uint32",
+            id: 1
+          },
+          alarmConfidence: {
+            type: "float",
+            id: 2
+          }
+        }
+      },
+      SingleSimpleObjectData: {
+        fields: {
+          objectConfidence: {
+            type: "float",
+            id: 1
+          },
+          objectRectangle: {
+            type: "Rectangle",
+            id: 2
+          },
+          extendField: {
+            keyType: "string",
+            type: "string",
+            id: 3
+          },
+          innerRectangle: {
+            keyType: "string",
+            type: "Rectangle",
+            id: 4
+          },
+          alarmMapData: {
+            keyType: "string",
+            type: "AlarmData",
+            id: 5
+          },
+          reId: {
+            type: "string",
+            id: 6
+          },
+          coordinate: {
+            type: "Coordinate",
+            id: 7
+          },
+          croppedImage: {
+            type: "bytes",
+            id: 8
+          }
+        }
+      },
+      SimpleObjectDataList: {
+        fields: {
+          singleSimpleObjectData: {
+            rule: "repeated",
+            type: "SingleSimpleObjectData",
+            id: 1
+          }
+        }
+      },
+      PolygonVertexData: {
+        fields: {
+          polygonVertex: {
+            rule: "repeated",
+            type: "Point",
+            id: 1
+          }
+        }
+      },
+      PolygonVertexDataList: {
+        fields: {
+          polygonVertexList: {
+            rule: "repeated",
+            type: "PolygonVertexData",
+            id: 1
+          }
+        }
+      },
+      DetectionCommonData: {
+        fields: {
+          baseData: {
+            type: "BaseData",
+            id: 1
+          },
+          polygonVertexMapListData: {
+            keyType: "string",
+            type: "PolygonVertexDataList",
+            id: 2
+          },
+          singleObjectMapListData: {
+            keyType: "string",
+            type: "SimpleObjectDataList",
+            id: 3
+          }
+        }
+      },
+      GeneralDetectionMapData: {
+        fields: {
+          generalMapData: {
+            keyType: "string",
+            type: "DetectionCommonData",
+            id: 1
+          }
+        }
+      }
+    }
+  }
+});
+
+module.exports = $root;

@@ -12,4 +12,13 @@ import {createPinia} from 'pinia';
 const pinia = createPinia()
 app.use(pinia)
 
+// 注册全部 element图标
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
+
+// 引入饿了么全部css样式
+import 'element-plus/dist/index.css'
+
 app.mount("#app");

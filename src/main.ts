@@ -12,6 +12,12 @@ import {createPinia} from 'pinia';
 const pinia = createPinia()
 app.use(pinia)
 
+// 多语言
+import i18n from "@/language";
+app.use(i18n)
+
+
+
 // 注册全部 element图标
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

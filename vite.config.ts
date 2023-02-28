@@ -32,6 +32,9 @@ export default defineConfig({
         target: "http://127.0.0.1:3000", //代理的地址
         changeOrigin: true,
       },
+      "/sdk": {
+        target: "http://127.0.0.1:3050", //sdk代理的地址
+      },
     },
   },
 });

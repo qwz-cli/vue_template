@@ -1,6 +1,76 @@
+
 * {
   margin: 0;
   padding: 0;
   list-style: none;
   // color: #000;
+}
+
+// 主题色
+.font-color {
+  color: #01d4f9;
+}
+
+// 最小字体
+.font-min-size {
+  font-size: 12px;
+}
+
+// 鼠标常用手势
+.cursorP {
+  cursor: pointer;
+}
+
+// 鼠标默认手势
+.cursor {
+  cursor: default;
+}
+
+// 单行省略号
+.uniline {
+  overflow: hidden; //设置了这个属性，text-overflow属性才会生效
+  text-overflow: ellipsis; //超出范围的文本内容用省略号显示。
+  white-space: nowrap; //禁止换行
+}
+
+// 多行省略号
+.Mtext_2 {
+  overflow: hidden; //同上
+  text-overflow: ellipsis; //同上
+  display: -webkit-box; //对象作为弹性盒子模型显示；
+  -webkit-line-clamp: 2; //来限制一个块元素显示文本的行数；
+  -webkit-box-orient: vertical; //必须结合的属性，设置或者检索伸缩盒对象的子元素的排列方式。
+}
+
+
+// 滚动条的宽高和背景
+::-webkit-scrollbar{
+  width:5px;
+  height:16px;
+  background-color:#F5F5F5;
+  }
+  
+  /*定义滚动条轨道
+  
+  内阴影+圆角*/
+  ::-webkit-scrollbar-track{
+  -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.2);
+  border-radius:10px;
+  background-color:#F5F5F5;
+  }
+  
+  /*定义滑块
+  
+  内阴影+圆角*/
+  ::-webkit-scrollbar-thumb{
+  border-radius:10px;
+  // -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.2);
+  background-color:#999;
+  
+  }
+  
+
+// 引导页选中的样式
+.v-tour__target--highlighted {
+  box-shadow: 0 0 0 99999px rgba(0, 0, 0, 0.4) !important;
 }

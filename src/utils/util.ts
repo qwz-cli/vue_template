@@ -4,20 +4,11 @@ import { ElMessageBox, ElMessage } from "element-plus";
  * TODO: 封装的方法
  */
 
-//! uint8array转Base64
-export const uint8arrayToBase64_util = (u8Arr: any) => {
-  let CHUNK_SIZE = 0x8000; //arbitrary number
-  let index = 0;
-  let length = u8Arr.length;
-  let result = "";
-  let slice;
-  while (index < length) {
-    slice = u8Arr.subarray(index, Math.min(index + CHUNK_SIZE, length));
-    result += String.fromCharCode.apply(null, slice);
-    index += CHUNK_SIZE;
-  }
-  return btoa(result);
-};
+// ? 创建表单检验的约束
+interface CreateRules {
+  required?: string[]; // 只读
+  validator?: KeyStringAny<Rules_Item>; // 自定义
+}
 
 // ? 提示框的约束
 type TipsType = "success" | "warning" | "info" | "error";
@@ -57,8 +48,44 @@ export const determine_util = (
   });
 };
 
+/**
+ * ! 创建表单检验规则
+ * @param info  配置
+ */
+
+export const createRules_util = (info: CreateRules): Rules => {
+  const { required, validator } = info;
+  const rulesObj: Rules = {};
+
+  required?.forEach((item) => {
+    const arr: string[] = item.split("_");
+    const trigger = arr?.[1] === "c" ? "change" : "blur";
+    rulesObj[arr[0]] = [
+      {
+        trigger,
+        required: true,
+        message: "不能为空",
+      },
+    ];
+  });
+
+  if (validator) {
+    for (let key in validator) {
+      // rulesObj.confirmPass.push(validator[key]);
+      if (rulesObj?.[key]) {
+        rulesObj[key].push(validator[key]);
+      } else {
+        rulesObj[key] = [validator[key]];
+      }
+    }
+  }
+
+  // console.log(83, rulesObj);
+  return rulesObj;
+};
+
 // !检验数据类型
-export const typeOf = function (data: any) {
+export const typeOf_util = function (data: any) {
   return Object.prototype.toString.call(data).slice(8, -1).toLowerCase();
 };
 
@@ -85,7 +112,7 @@ export const throttle_util = (() => {
 
 // ! 解释url get请求参数
 export const getSearchParams_util = () => {
-  const searchPar = new URLSearchParams(window.location.search);
+  const searchPar:any = new URLSearchParams(window.location.search);
   const paramsObj: any = {};
   for (const [key, value] of searchPar.entries()) {
     paramsObj[key] = value;
@@ -234,4 +261,19 @@ export const timeFormat_util = (time: number | string) => {
     }
   }
   return timeStr;
+};
+
+//! uint8array转Base64
+export const uint8arrayToBase64_util = (u8Arr: any) => {
+  let CHUNK_SIZE = 0x8000; //arbitrary number
+  let index = 0;
+  let length = u8Arr.length;
+  let result = "";
+  let slice;
+  while (index < length) {
+    slice = u8Arr.subarray(index, Math.min(index + CHUNK_SIZE, length));
+    result += String.fromCharCode.apply(null, slice);
+    index += CHUNK_SIZE;
+  }
+  return btoa(result);
 };
